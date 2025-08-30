@@ -231,8 +231,16 @@ body {
     font-weight: 400;
     opacity: 0.9;
     margin-bottom: 40px;
-    max-width: 500px;
+    max-width: 650px;
     line-height: 1.5;
+}
+
+.subtitle-line-1 {
+    white-space: nowrap;
+}
+
+.subtitle-line-2 {
+    display: inline-block;
 }
 
 .hero-features {
@@ -945,6 +953,10 @@ body {
 
     .hero-subtitle {
         font-size: 16px;
+    }
+
+    .subtitle-line-1 {
+        white-space: normal;
     }
 
     .section-header h2 {
