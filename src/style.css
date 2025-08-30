@@ -208,16 +208,16 @@ body {
 }
 
 .hero-title {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 24px;
 }
 
 .hero-title-main {
-    font-size: clamp(48px, 8vw, 72px);
+    font-size: clamp(36px, 6vw, 64px);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.02em;
+    display: block;
+    white-space: nowrap;
 }
 
 .hero-title-sub {
@@ -934,7 +934,9 @@ body {
     }
 
     .hero-title-main {
-        font-size: 36px;
+        font-size: 28px;
+        white-space: normal;
+        line-height: 1.3;
     }
 
     .hero-title-sub {
