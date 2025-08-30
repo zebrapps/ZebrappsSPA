@@ -14,8 +14,13 @@
     flex-direction: row-reverse;
 }
 
-[dir="rtl"] .nav-right {
-    flex-direction: row-reverse;
+/* Force logo-left, menu-right layout regardless of RTL */
+.nav-container {
+    direction: ltr;
+}
+
+[dir="rtl"] .nav-menu {
+    direction: rtl;
 }
 
 [dir="rtl"] .hero-features {
@@ -96,21 +101,24 @@ body {
     padding: 16px 24px;
     max-width: 1200px;
     margin: 0 auto;
+    flex-direction: row;
 }
 
 .nav-right {
     display: flex;
     align-items: center;
     gap: 32px;
+    order: 2;
 }
 
 .nav-brand {
     display: flex;
     align-items: center;
+    order: 1;
 }
 
 .nav-logo {
-    height: 48px;
+    height: 64px;
     width: auto;
     border-radius: 8px;
     object-fit: contain;
@@ -866,7 +874,7 @@ body {
     }
 
     .nav-logo {
-        height: 40px;
+        height: 48px;
     }
 
     .nav-right {
