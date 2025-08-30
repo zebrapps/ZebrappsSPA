@@ -603,7 +603,43 @@ body {
 .registration-info > p {
     font-size: 20px;
     opacity: 0.9;
+    margin-bottom: 32px;
+}
+
+.target-audience {
     margin-bottom: 40px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.target-audience h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.target-audience ul {
+    list-style: none;
+    padding: 0;
+}
+
+.target-audience li {
+    padding: 8px 0;
+    padding-right: 20px;
+    position: relative;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.target-audience li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: #fff;
+    font-weight: 600;
 }
 
 .course-details {
