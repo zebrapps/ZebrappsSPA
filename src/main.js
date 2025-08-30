@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showSuccessMessage(type) {
         const message = type === 'registration' 
-            ? 'Thank you for your registration! We will contact you soon with course details.'
-            : 'Thank you for your message! We will get back to you within 24 hours.';
+            ? 'תודה על הרשמתך! ניצור איתך קשר בקרוב עם פרטי הקורס.'
+            : 'תודה על פנייתך! נחזור אליך תוך 24 שעות.';
             
         // Create and show success popup
         const popup = document.createElement('div');
@@ -114,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.innerHTML = `
             <div class="popup-content">
                 <div class="popup-icon">✅</div>
-                <h3>Success!</h3>
+                <h3>הצלחה!</h3>
                 <p>${message}</p>
-                <button onclick="this.parentElement.parentElement.remove()">Close</button>
+                <button onclick="this.parentElement.parentElement.remove()">סגור</button>
             </div>
         `;
         
@@ -245,6 +245,7 @@ const popupStyles = `
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         transform: scale(0.9);
         animation: popupScaleIn 0.3s ease forwards 0.1s;
+        direction: rtl;
     }
 
     .popup-icon {
