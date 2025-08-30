@@ -243,6 +243,15 @@ body {
     display: inline-block;
 }
 
+.hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.8;
+    margin-bottom: 32px;
+    font-style: italic;
+    text-align: center;
+}
+
 .hero-features {
     display: flex;
     gap: 32px;
