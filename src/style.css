@@ -26,7 +26,7 @@ img, video, iframe {
 }
 
 [dir="rtl"] .nav-menu {
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 /* Force logo-left, menu-right layout regardless of RTL */

@@ -129,6 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Validate phone number (Israeli format)
+            const phoneRegex = /^0[2-9]\d{7,8}$|^[2-9]\d{7,8}$|^\+972[2-9]\d{7,8}$/;
+            if (!phoneRegex.test(phone.replace(/[-\s]/g, ''))) {
+                alert('אנא הזן מספר טלפון תקין (לדוגמה: 050-1234567 או 02-1234567)');
+                return;
+            }
+
             // Prepare form data
             const formData = new FormData(this);
             const data = {
