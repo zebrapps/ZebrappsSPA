@@ -166,55 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function showSuccessMessage(type) {
-        const message = type === 'registration'
-            ? 'תודה על הרשמתך! הנתונים נשלחו בהצלחה. מעביר אותך לעמוד התשלום...'
-            : 'תודה על פנייתך! נחזור אליך תוך 24 שעות.';
-
-        // Create and show success popup
-        const popup = document.createElement('div');
-        popup.className = 'success-popup';
-        popup.innerHTML = `
-            <div class="popup-content">
-                <div class="popup-icon">✅</div>
-                <h3>הצלחה!</h3>
-                <p>${message}</p>
-                <button onclick="this.parentElement.parentElement.remove()">סגור</button>
-            </div>
-        `;
-
-        document.body.appendChild(popup);
-
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            if (popup.parentElement) {
-                popup.remove();
-            }
-        }, 5000);
-    }
-
-    function showErrorMessage(errorText) {
-        // Create and show error popup
-        const popup = document.createElement('div');
-        popup.className = 'error-popup';
-        popup.innerHTML = `
-            <div class="popup-content error-content">
-                <div class="popup-icon">❌</div>
-                <h3>שגיאה</h3>
-                <p>${errorText}</p>
-                <button onclick="this.parentElement.parentElement.remove()">סגור</button>
-            </div>
-        `;
-
-        document.body.appendChild(popup);
-
-        // Auto remove after 7 seconds
-        setTimeout(() => {
-            if (popup.parentElement) {
-                popup.remove();
-            }
-        }, 7000);
-    }
 
     // Parallax effect for hero section
     window.addEventListener('scroll', function() {
@@ -321,6 +272,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Helper functions for showing messages
+function showSuccessMessage(type) {
+    const message = type === 'registration'
+        ? 'תודה על הרשמתך! הנתונים נשלחו בהצלחה. מעביר אותך לעמוד התשלום...'
+        : 'תודה על פנייתך! נחזור אליך תוך 24 שעות.';
+
+    // Create and show success popup
+    const popup = document.createElement('div');
+    popup.className = 'success-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <div class="popup-icon">✅</div>
+            <h3>הצלחה!</h3>
+            <p>${message}</p>
+            <button onclick="this.parentElement.parentElement.remove()">סגור</button>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (popup.parentElement) {
+            popup.remove();
+        }
+    }, 5000);
+}
+
+function showErrorMessage(errorText) {
+    // Create and show error popup
+    const popup = document.createElement('div');
+    popup.className = 'error-popup';
+    popup.innerHTML = `
+        <div class="popup-content error-content">
+            <div class="popup-icon">❌</div>
+            <h3>שגיאה</h3>
+            <p>${errorText}</p>
+            <button onclick="this.parentElement.parentElement.remove()">סגור</button>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    // Auto remove after 7 seconds
+    setTimeout(() => {
+        if (popup.parentElement) {
+            popup.remove();
+        }
+    }, 7000);
+}
 
 // Function to send registration email via contact API
 async function sendRegistrationEmail(data) {
