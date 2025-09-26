@@ -360,6 +360,14 @@ async function sendRegistrationEmail(data) {
         console.log('API response status:', response.status);
         console.log('API response headers:', response.headers);
 
+        // Check if response is JSON before parsing
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            const textResponse = await response.text();
+            console.log('Non-JSON response received:', textResponse);
+            throw new Error(`Server returned non-JSON response: ${textResponse.substring(0, 100)}`);
+        }
+
         const result = await response.json();
         console.log('API response data:', result);
 

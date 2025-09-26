@@ -24,22 +24,44 @@ export default async function handler(req, res) {
       });
     }
 
-    // Initialize Resend inside the try block to catch initialization errors
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
     // Debug logging
     console.log('Contact API called');
     console.log('Method:', req.method);
     console.log('Body:', req.body);
+
+    // Validate environment variables first - before using them
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY environment variable is not set');
+      return res.status(500).json({
+        ok: false,
+        error: 'Missing RESEND_API_KEY environment variable'
+      });
+    }
+
+    if (!process.env.CONTACT_FROM) {
+      console.error('CONTACT_FROM environment variable is not set');
+      return res.status(500).json({
+        ok: false,
+        error: 'Missing CONTACT_FROM environment variable'
+      });
+    }
+
+    if (!process.env.CONTACT_TO) {
+      console.error('CONTACT_TO environment variable is not set');
+      return res.status(500).json({
+        ok: false,
+        error: 'Missing CONTACT_TO environment variable'
+      });
+    }
+
     console.log('Environment check:', {
       hasResendKey: !!process.env.RESEND_API_KEY,
-      resendKeyPrefix: process.env.RESEND_API_KEY ? process.env.RESEND_API_KEY.substring(0, 5) + '...' : 'undefined',
-      hasContactFrom: !!process.env.CONTACT_FROM,
+      resendKeyPrefix: process.env.RESEND_API_KEY.substring(0, 5) + '...',
       contactFrom: process.env.CONTACT_FROM,
-      hasContactTo: !!process.env.CONTACT_TO,
       contactTo: process.env.CONTACT_TO,
       nodeEnv: process.env.NODE_ENV
     });
+
     const { name, email, message } = req.body;
 
     // Validate that all required fields are present
@@ -58,22 +80,8 @@ export default async function handler(req, res) {
       });
     }
 
-    // Validate environment variables
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY environment variable is not set');
-      return res.status(500).json({
-        ok: false,
-        error: 'Server configuration error'
-      });
-    }
-
-    if (!process.env.CONTACT_FROM || !process.env.CONTACT_TO) {
-      console.error('CONTACT_FROM or CONTACT_TO environment variables are not set');
-      return res.status(500).json({
-        ok: false,
-        error: 'Server configuration error'
-      });
-    }
+    // Initialize Resend after validating env vars
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Send email using Resend
     const emailResult = await resend.emails.send({
