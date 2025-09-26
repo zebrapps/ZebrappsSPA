@@ -1,21 +1,19 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default async function handler(req, res) {
-  try {
-    // Enable CORS for frontend requests
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Content-Type', 'application/json');
+  // Always set JSON content type and CORS headers first
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  try {
     // Handle preflight OPTIONS request
     if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+      return res.status(200).json({ ok: true });
     }
 
     // Only allow POST requests
@@ -25,6 +23,9 @@ export default async function handler(req, res) {
         error: 'Method not allowed. Only POST requests are accepted.'
       });
     }
+
+    // Initialize Resend inside the try block to catch initialization errors
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Debug logging
     console.log('Contact API called');
@@ -133,16 +134,11 @@ You can reply directly to this email to respond to ${name}.
       name: error.name
     });
 
-    // Ensure we always return JSON
-    try {
-      return res.status(500).json({
-        ok: false,
-        error: 'Failed to send email. Please try again later.',
-        debug: process.env.NODE_ENV === 'development' ? error.message : undefined
-      });
-    } catch (jsonError) {
-      console.error('Failed to send JSON response:', jsonError);
-      return res.status(500).end('Internal Server Error');
-    }
+    // Always return JSON, even on errors
+    return res.status(500).json({
+      ok: false,
+      error: 'Failed to send email. Please try again later.',
+      debug: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 }
