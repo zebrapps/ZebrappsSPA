@@ -12,13 +12,16 @@ function scrollToSection(sectionId) {
     if (element) {
         const navHeight = document.querySelector('.nav').offsetHeight;
         const elementPosition = element.offsetTop - navHeight;
-        
+
         window.scrollTo({
             top: elementPosition,
             behavior: 'smooth'
         });
     }
 }
+
+// Make scrollToSection available globally immediately
+window.scrollToSection = scrollToSection;
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -59,7 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
-            scrollToSection(targetId);
+            const element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
 
             // Close mobile menu after clicking a link
             if (navMenu.classList.contains('active')) {
@@ -530,5 +536,3 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = popupStyles;
 document.head.appendChild(styleSheet);
 
-// Make scrollToSection available globally
-window.scrollToSection = scrollToSection;

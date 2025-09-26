@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -67,10 +68,10 @@
                         </div>
                     </div>
                     <div class="hero-cta">
-                        <button class="btn-primary" onclick="scrollToSection('registration')">
+                        <button class="btn-primary" onclick="document.getElementById('registration').scrollIntoView({behavior: 'smooth', block: 'start'})">
                             שריינו מקום עכשיו
                         </button>
-                        <button class="btn-secondary" onclick="scrollToSection('course')">
+                        <button class="btn-secondary" onclick="document.getElementById('course').scrollIntoView({behavior: 'smooth', block: 'start'})">
                             למד עוד
                         </button>
                     </div>

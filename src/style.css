@@ -771,7 +771,6 @@ body {
 }
 
 .course .section-header p {
-    white-space: nowrap;
     max-width: none;
 }
 
@@ -1865,6 +1864,12 @@ body {
 
     .section-header h2 {
         font-size: 32px;
+    }
+
+    .section-header p {
+        font-size: 18px;
+        padding: 0 20px;
+        line-height: 1.6;
     }
 
     .registration-info h2 {
