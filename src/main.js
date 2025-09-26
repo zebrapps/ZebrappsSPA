@@ -159,10 +159,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function showSuccessMessage(type) {
-        const message = type === 'registration' 
-            ? 'תודה על הרשמתך! ניצור איתך קשר בקרוב עם פרטי הקורס.'
+        const message = type === 'registration'
+            ? 'תודה על הרשמתך! הנתונים נשלחו בהצלחה. מעביר אותך לעמוד התשלום...'
             : 'תודה על פנייתך! נחזור אליך תוך 24 שעות.';
-            
+
         // Create and show success popup
         const popup = document.createElement('div');
         popup.className = 'success-popup';
@@ -174,15 +174,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button onclick="this.parentElement.parentElement.remove()">סגור</button>
             </div>
         `;
-        
+
         document.body.appendChild(popup);
-        
+
         // Auto remove after 5 seconds
         setTimeout(() => {
             if (popup.parentElement) {
                 popup.remove();
             }
         }, 5000);
+    }
+
+    function showErrorMessage(errorText) {
+        // Create and show error popup
+        const popup = document.createElement('div');
+        popup.className = 'error-popup';
+        popup.innerHTML = `
+            <div class="popup-content error-content">
+                <div class="popup-icon">❌</div>
+                <h3>שגיאה</h3>
+                <p>${errorText}</p>
+                <button onclick="this.parentElement.parentElement.remove()">סגור</button>
+            </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        // Auto remove after 7 seconds
+        setTimeout(() => {
+            if (popup.parentElement) {
+                popup.remove();
+            }
+        }, 7000);
     }
 
     // Parallax effect for hero section
@@ -291,34 +314,68 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Function to send registration email
-function sendRegistrationEmail(data) {
+// Function to send registration email via contact API
+async function sendRegistrationEmail(data) {
     // Show loading state
     const submitButton = document.querySelector('#registrationForm button[type="submit"]');
     const originalText = submitButton.textContent;
-    submitButton.textContent = 'מעביר לתשלום...';
+    submitButton.textContent = 'שולח נתונים...';
     submitButton.disabled = true;
 
-    // Log the registration data (you can check browser console)
-    console.log('Registration data:', data);
+    try {
+        // Send data to contact API
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: data.name,
+                email: data.email,
+                message: `הרשמה לקורס בינה מלאכותית
 
-    // For now, just redirect to payment page
-    // In production, you'll need to set up EmailJS or a backend service to send emails
-    setTimeout(() => {
-        // Show success message
-        alert('תודה על הרשמתך! מעביר אותך לעמוד התשלום...');
+פרטי ההרשמה:
+שם: ${data.name}
+אימייל: ${data.email}
+טלפון: ${data.phone}
+תפקיד: ${data.position}
+ציפיות: ${data.expectations}
 
-        // Reset form
-        document.getElementById('registrationForm').reset();
+הלקוח מעוניין להירשם לקורס הבינה המלאכותית שמתחיל ב-15 לאוקטובר.`
+            }),
+        });
 
-        // Redirect to payment page
-        window.location.href = 'https://payments.payplus.co.il/36b25027-8b92-41e4-8ba4-5a28e5498add';
-    }, 1000);
+        const result = await response.json();
+
+        if (result.ok) {
+            // Success - show thank you message and redirect to payment
+            showSuccessMessage('registration');
+
+            // Reset form
+            document.getElementById('registrationForm').reset();
+
+            // Redirect to payment after a short delay
+            setTimeout(() => {
+                window.location.href = 'https://payments.payplus.co.il/36b25027-8b92-41e4-8ba4-5a28e5498add';
+            }, 2000);
+        } else {
+            // Error from API
+            showErrorMessage(result.error || 'שגיאה בשליחת הנתונים');
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        showErrorMessage('שגיאה בחיבור לשרת. אנא נסה שוב.');
+    } finally {
+        // Restore button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+    }
 }
 
-// Add CSS for success popup
+// Add CSS for success and error popups
 const popupStyles = `
-    .success-popup {
+    .success-popup,
+    .error-popup {
         position: fixed;
         top: 0;
         left: 0;
@@ -346,6 +403,10 @@ const popupStyles = `
         direction: rtl;
     }
 
+    .error-content {
+        border-top: 4px solid #dc3545;
+    }
+
     .popup-icon {
         font-size: 48px;
         margin-bottom: 20px;
@@ -358,10 +419,18 @@ const popupStyles = `
         margin-bottom: 16px;
     }
 
+    .error-content h3 {
+        color: #dc3545;
+    }
+
     .popup-content p {
         color: #86868b;
         margin-bottom: 24px;
         line-height: 1.5;
+    }
+
+    .error-content p {
+        color: #721c24;
     }
 
     .popup-content button {
@@ -373,6 +442,10 @@ const popupStyles = `
         font-weight: 600;
         cursor: pointer;
         transition: transform 0.2s ease;
+    }
+
+    .error-content button {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     }
 
     .popup-content button:hover {
