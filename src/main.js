@@ -112,13 +112,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form handling
     const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
+        console.log('Registration form found and event listener attached');
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Form submitted');
 
             // Check required fields
             const name = this.querySelector('input[name="name"]').value.trim();
             const email = this.querySelector('input[name="email"]').value.trim();
             const phone = this.querySelector('input[name="phone"]').value.trim();
+
+            console.log('Form data:', { name, email, phone });
 
             if (!name || !email || !phone) {
                 alert('אנא מלא את כל השדות הנדרשים: שם מלא, כתובת דוא"ל ומספר טלפון');
@@ -135,9 +139,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 expectations: formData.get('expectations') || 'לא צוין'
             };
 
+            console.log('Sending registration data:', data);
+
             // Send email
             sendRegistrationEmail(data);
         });
+    } else {
+        console.error('Registration form not found!');
     }
 
     // Handle other forms
@@ -316,6 +324,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to send registration email via contact API
 async function sendRegistrationEmail(data) {
+    console.log('sendRegistrationEmail called with:', data);
+
     // Show loading state
     const submitButton = document.querySelector('#registrationForm button[type="submit"]');
     const originalText = submitButton.textContent;
@@ -323,6 +333,8 @@ async function sendRegistrationEmail(data) {
     submitButton.disabled = true;
 
     try {
+        console.log('Making API request to /api/contact');
+
         // Send data to contact API
         const response = await fetch('/api/contact', {
             method: 'POST',
@@ -345,9 +357,14 @@ async function sendRegistrationEmail(data) {
             }),
         });
 
+        console.log('API response status:', response.status);
+        console.log('API response headers:', response.headers);
+
         const result = await response.json();
+        console.log('API response data:', result);
 
         if (result.ok) {
+            console.log('Success! Showing success message');
             // Success - show thank you message and redirect to payment
             showSuccessMessage('registration');
 
@@ -359,6 +376,7 @@ async function sendRegistrationEmail(data) {
                 window.location.href = 'https://payments.payplus.co.il/36b25027-8b92-41e4-8ba4-5a28e5498add';
             }, 2000);
         } else {
+            console.log('API returned error:', result.error);
             // Error from API
             showErrorMessage(result.error || 'שגיאה בשליחת הנתונים');
         }
