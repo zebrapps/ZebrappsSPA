@@ -6,25 +6,39 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default async function handler(req, res) {
-  // Enable CORS for frontend requests
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Handle preflight OPTIONS request
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      ok: false,
-      error: 'Method not allowed. Only POST requests are accepted.'
-    });
-  }
-
   try {
+    // Enable CORS for frontend requests
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Content-Type', 'application/json');
+
+    // Handle preflight OPTIONS request
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
+
+    // Only allow POST requests
+    if (req.method !== 'POST') {
+      return res.status(405).json({
+        ok: false,
+        error: 'Method not allowed. Only POST requests are accepted.'
+      });
+    }
+
+    // Debug logging
+    console.log('Contact API called');
+    console.log('Method:', req.method);
+    console.log('Body:', req.body);
+    console.log('Environment check:', {
+      hasResendKey: !!process.env.RESEND_API_KEY,
+      resendKeyPrefix: process.env.RESEND_API_KEY ? process.env.RESEND_API_KEY.substring(0, 5) + '...' : 'undefined',
+      hasContactFrom: !!process.env.CONTACT_FROM,
+      contactFrom: process.env.CONTACT_FROM,
+      hasContactTo: !!process.env.CONTACT_TO,
+      contactTo: process.env.CONTACT_TO,
+      nodeEnv: process.env.NODE_ENV
+    });
     const { name, email, message } = req.body;
 
     // Validate that all required fields are present
@@ -113,18 +127,22 @@ You can reply directly to this email to respond to ${name}.
 
   } catch (error) {
     console.error('Contact form error:', error);
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
 
-    // Handle specific Resend errors
-    if (error instanceof Error) {
+    // Ensure we always return JSON
+    try {
       return res.status(500).json({
         ok: false,
-        error: 'Failed to send email. Please try again later.'
+        error: 'Failed to send email. Please try again later.',
+        debug: process.env.NODE_ENV === 'development' ? error.message : undefined
       });
+    } catch (jsonError) {
+      console.error('Failed to send JSON response:', jsonError);
+      return res.status(500).end('Internal Server Error');
     }
-
-    return res.status(500).json({
-      ok: false,
-      error: 'An unexpected error occurred. Please try again later.'
-    });
   }
 }
