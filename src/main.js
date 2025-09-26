@@ -296,7 +296,7 @@ function sendRegistrationEmail(data) {
         document.getElementById('registrationForm').reset();
 
         // Redirect to payment page
-        window.location.href = 'https://payments.payplus.co.il/b59d2594-a16c-445a-a633-223048ea9286';
+        window.location.href = 'https://payments.payplus.co.il/36b25027-8b92-41e4-8ba4-5a28e5498add';
     }, 1000);
 }
 
