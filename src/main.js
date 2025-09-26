@@ -112,17 +112,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form handling
     const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
-        console.log('Registration form found and event listener attached');
+        debugLog('Registration form found and event listener attached');
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log('Form submitted');
+            debugLog('Form submitted');
 
             // Check required fields
             const name = this.querySelector('input[name="name"]').value.trim();
             const email = this.querySelector('input[name="email"]').value.trim();
             const phone = this.querySelector('input[name="phone"]').value.trim();
 
-            console.log('Form data:', { name, email, phone });
+            debugLog('Form data:', { name, email, phone });
 
             if (!name || !email || !phone) {
                 alert('אנא מלא את כל השדות הנדרשים: שם מלא, כתובת דוא"ל ומספר טלפון');
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 expectations: formData.get('expectations') || 'לא צוין'
             };
 
-            console.log('Sending registration data:', data);
+            debugLog('Sending registration data:', data);
 
             // Send email
             sendRegistrationEmail(data);
@@ -273,6 +273,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Debug flag - set to false to reduce console output
+const DEBUG_MODE = false;
+const debugLog = DEBUG_MODE ? console.log : () => {};
+
 // Helper functions for showing messages
 function showSuccessMessage(type) {
     const message = type === 'registration'
@@ -326,7 +330,7 @@ function showErrorMessage(errorText) {
 
 // Function to send registration email via contact API
 async function sendRegistrationEmail(data) {
-    console.log('sendRegistrationEmail called with:', data);
+    debugLog('sendRegistrationEmail called with:', data);
 
     // Show loading state
     const submitButton = document.querySelector('#registrationForm button[type="submit"]');
@@ -335,7 +339,7 @@ async function sendRegistrationEmail(data) {
     submitButton.disabled = true;
 
     try {
-        console.log('Making API request to /api/contact');
+        debugLog('Making API request to /api/contact');
 
         // Send data to contact API
         const response = await fetch('/api/contact', {
@@ -359,22 +363,22 @@ async function sendRegistrationEmail(data) {
             }),
         });
 
-        console.log('API response status:', response.status);
-        console.log('API response headers:', response.headers);
+        debugLog('API response status:', response.status);
+        debugLog('API response headers:', response.headers);
 
         // Check if response is JSON before parsing
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             const textResponse = await response.text();
-            console.log('Non-JSON response received:', textResponse);
+            debugLog('Non-JSON response received:', textResponse);
             throw new Error(`Server returned non-JSON response: ${textResponse.substring(0, 100)}`);
         }
 
         const result = await response.json();
-        console.log('API response data:', result);
+        debugLog('API response data:', result);
 
         if (result.ok) {
-            console.log('Success! Showing success message');
+            debugLog('Success! Showing success message');
             // Success - show thank you message and redirect to payment
             showSuccessMessage('registration');
 
@@ -386,7 +390,7 @@ async function sendRegistrationEmail(data) {
                 window.location.href = 'https://payments.payplus.co.il/4822d381-0188-4ac3-b90c-34522ed3a24d';
             }, 2000);
         } else {
-            console.log('API returned error:', result.error);
+            debugLog('API returned error:', result.error);
             // Error from API
             showErrorMessage(result.error || 'שגיאה בשליחת הנתונים');
         }
@@ -399,6 +403,31 @@ async function sendRegistrationEmail(data) {
         submitButton.disabled = false;
     }
 }
+
+// Global error handler to reduce console noise from external services
+window.addEventListener('error', function(e) {
+    // Suppress common external service errors
+    if (e.message && (
+        e.message.includes('google-analytics') ||
+        e.message.includes('ERR_BLOCKED_BY_CLIENT') ||
+        e.message.includes('Failed to fetch') && e.filename && e.filename.includes('google')
+    )) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Handle unhandled promise rejections (like network failures)
+window.addEventListener('unhandledrejection', function(e) {
+    if (e.reason && (
+        e.reason.message?.includes('google-analytics') ||
+        e.reason.message?.includes('Failed to fetch') ||
+        e.reason.message?.includes('ERR_BLOCKED_BY_CLIENT')
+    )) {
+        e.preventDefault();
+        return false;
+    }
+});
 
 // Add CSS for success and error popups
 const popupStyles = `
