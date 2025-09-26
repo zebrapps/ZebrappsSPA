@@ -1,9 +1,9 @@
-import { Resend } from 'resend';
+const { Resend } = require('resend');
 
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Always set JSON content type and CORS headers first
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
