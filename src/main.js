@@ -383,7 +383,7 @@ async function sendRegistrationEmail(data) {
 
             // Redirect to payment after a short delay
             setTimeout(() => {
-                window.location.href = 'https://payments.payplus.co.il/36b25027-8b92-41e4-8ba4-5a28e5498add';
+                window.location.href = 'https://payments.payplus.co.il/4822d381-0188-4ac3-b90c-34522ed3a24d';
             }, 2000);
         } else {
             console.log('API returned error:', result.error);
