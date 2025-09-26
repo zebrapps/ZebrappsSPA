@@ -1,3 +1,8 @@
+// Initialize EmailJS
+(function() {
+    emailjs.init("YOUR_PUBLIC_KEY"); // You need to replace this with your actual EmailJS public key
+})();
+
 // Smooth scrolling navigation
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
@@ -86,18 +91,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form handling
-    const forms = document.querySelectorAll('.form');
-    forms.forEach(form => {
+    const registrationForm = document.getElementById('registrationForm');
+    if (registrationForm) {
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Check required fields
+            const name = this.querySelector('input[name="name"]').value.trim();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const phone = this.querySelector('input[name="phone"]').value.trim();
+
+            if (!name || !email || !phone) {
+                alert('אנא מלא את כל השדות הנדרשים: שם מלא, כתובת דוא"ל ומספר טלפון');
+                return;
+            }
+
+            // Prepare form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                position: formData.get('position') || 'לא צוין',
+                expectations: formData.get('expectations') || 'לא צוין'
+            };
+
+            // Send email
+            sendRegistrationEmail(data);
+        });
+    }
+
+    // Handle other forms
+    const otherForms = document.querySelectorAll('.form:not(#registrationForm)');
+    otherForms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(this);
-            const formType = this.closest('.registration-form') ? 'registration' : 'contact';
-            
+            const formType = 'contact';
+
             // Show success message (in a real app, this would send data to a server)
             showSuccessMessage(formType);
-            
+
             // Reset form
             this.reset();
         });
@@ -174,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 
     // Add counter animation for stats
-    function animateCounter(element, target, duration = 2000) {
+    function animateCounter(element, target, duration = 2000, isPercentage = false) {
         let start = 0;
         const increment = target / (duration / 16);
         
@@ -184,11 +220,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (target === Infinity) {
                     element.textContent = '∞';
                 } else {
-                    element.textContent = Math.ceil(start);
+                    element.textContent = Math.ceil(start) + (isPercentage ? '%' : '');
                 }
                 requestAnimationFrame(updateCounter);
             } else {
-                element.textContent = target === Infinity ? '∞' : target;
+                element.textContent = (target === Infinity ? '∞' : target) + (isPercentage ? '%' : '');
             }
         }
         updateCounter();
@@ -204,8 +240,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (targetValue === '∞') {
                     statElement.textContent = '∞';
                 } else {
+                    const isPercentage = targetValue.includes('%');
                     const numericValue = parseInt(targetValue);
-                    animateCounter(statElement, numericValue);
+                    animateCounter(statElement, numericValue, 2000, isPercentage);
                 }
                 
                 statObserver.unobserve(entry.target);
@@ -234,6 +271,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Function to send registration email
+function sendRegistrationEmail(data) {
+    // Show loading state
+    const submitButton = document.querySelector('#registrationForm button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'מעביר לתשלום...';
+    submitButton.disabled = true;
+
+    // Log the registration data (you can check browser console)
+    console.log('Registration data:', data);
+
+    // For now, just redirect to payment page
+    // In production, you'll need to set up EmailJS or a backend service to send emails
+    setTimeout(() => {
+        // Show success message
+        alert('תודה על הרשמתך! מעביר אותך לעמוד התשלום...');
+
+        // Reset form
+        document.getElementById('registrationForm').reset();
+
+        // Redirect to payment page
+        window.location.href = 'https://payments.payplus.co.il/b59d2594-a16c-445a-a633-223048ea9286';
+    }, 1000);
+}
 
 // Add CSS for success popup
 const popupStyles = `

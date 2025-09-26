@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -20,10 +21,9 @@
             <div class="nav-right">
                 <div class="nav-menu" id="nav-menu">
                     <a href="#faq" class="nav-link">שאלות נפוצות</a>
-                    <a href="#contact" class="nav-link">צור קשר</a>
                     <a href="#registration" class="nav-link">הרשמה</a>
-                    <a href="#about" class="nav-link">אודות</a>
                     <a href="#testimonials" class="nav-link">המלצות</a>
+                    <a href="#about" class="nav-link">אודות</a>
                     <a href="#course" class="nav-link">הקורס</a>
                     <a href="#home" class="nav-link active">בית</a>
                 </div>
@@ -51,25 +51,26 @@
                         <span class="subtitle-line-2">מהבסיס ועד ליישומים מתקדמים</span>
                     </p>
                     <p class="hero-tagline">
-                        העולם כבר לא יחזור להיות מה שהיה...
+                        מחזור הבא מתחיל ב- 15 לאוקטובר<br>
+                        ימי רביעי בערב 17:00-21:00 בזום
                     </p>
                     <div class="hero-features">
                         <div class="feature-item">
-                            <span class="feature-icon">⚡</span>
-                            <span>40 שעות אקדמיות</span>
+                            <span class="feature-icon">👨‍💼</span>
+                            <span>מדריכים מומחים</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">🎯</span>
                             <span>למידה מעשית</span>
                         </div>
                         <div class="feature-item">
-                            <span class="feature-icon">👨‍💼</span>
-                            <span>מדריכים מומחים</span>
+                            <span class="feature-icon">⚡</span>
+                            <span>40 שעות אקדמיות</span>
                         </div>
                     </div>
                     <div class="hero-cta">
                         <button class="btn-primary" onclick="scrollToSection('registration')">
-                            התחל את המסע שלך בבינה מלאכותית
+                            שריינו מקום עכשיו
                         </button>
                         <button class="btn-secondary" onclick="scrollToSection('course')">
                             למד עוד
@@ -91,107 +92,161 @@
             </div>
         </section>
 
+        <!-- Intro Text Section -->
+        <section class="intro-text">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>העולם כבר לא יחזור להיות מה שהיה...</h2>
+                    <p>העולם משתנה מול העיניים שלנו. בינה מלאכותית (AI) נכנסת לכל תחום - עבודה, עסקים, קריירה, יצירתיות, והופכת לכלי הכרחי לכל מי שרוצה להישאר רלוונטי.<br>
+                    מי שלא יודע להשתמש בה - נשאר מאחור ועלול למצוא את עצמו מחוץ למשחק.</p>
+                    <p class="intro-highlight">הקורס הזה ייתן לך את הידע והכלים המעשיים לפרוץ קדימה ולהפוך<br>
+                    למנהיג העתיד בתחומך.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Structure Section -->
+        <section class="course-structure">
+            <div class="container">
+                <div class="course-structure-content">
+                    <h2>מבנה הקורס</h2>
+                    <p class="structure-subtitle">
+                        <a href="https://cdn.shopify.com/s/files/1/0687/1829/7265/files/AI-from-0-to-100.pdf?v=1756571508" target="_blank" rel="noopener noreferrer">לצפייה בסילבוס המלא הקליקו כאן</a>
+                    </p>
+                    
+                    <div class="course-stats">
+                        <div class="stat-item">
+                            <h3>8</h3>
+                            <p><strong>מפגשים מקיפים</strong><br>כל מפגש בן 4 שעות עם הפסקות</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>40</h3>
+                            <p><strong>שעות אקדמיות</strong><br>מתאים לעובדים כולל התאמה לחשכ״ל</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>15</h3>
+                            <p><strong>קבוצה קטנה</strong><br>מקסימום 15 משתתפים לחוויה אישית</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>100%</h3>
+                            <p><strong>מפגשים בזום</strong><br>כל המפגשים מוקלטים ונשלחים לתלמידים מיד בסיום כל שיעור</p>
+                        </div>
+                    </div>
+                    
+                    <div class="structure-highlight">
+                        <p>דגש מיוחד: שילוב ייחודי של תיאוריה, פרקטיקה ותרגילים מעשיים Hands-on שתוכלו ליישם מיד!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- The Course Section -->
         <section id="course" class="course">
             <div class="container">
                 <div class="section-header">
-                    <h2>הקורס</h2>
-                    <p>מסע מקיף מבסיסי הבינה המלאכותית ליישום מעשי</p>
+                    <h2>מה תלמדו בקורס?</h2>
+                    <p>בקורס "בינה מלאכותית - מאפס למאה" תרכשו ידע מעמיק וכלים פרקטיים שיאפשרו לכם לשלוט בעולם ה-AI:</p>
                 </div>
                 
-                <div class="course-overview">
-                    <div class="course-stats">
-                        <div class="stat-item">
-                            <h3>40</h3>
-                            <p>שעות אקדמיות</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>8</h3>
-                            <p>מפגשים חיים</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>100%</h3>
-                            <p>התמקדות מעשית</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>∞</h3>
-                            <p>תמיכה מתמשכת</p>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="course-content">
                     <div class="content-grid">
                         <div class="content-item">
-                            <div class="content-icon">🎯</div>
-                            <h3>יסודות הבינה המלאכותית</h3>
-                            <p>השלט את המושגים והעקרונות הבסיסיים של בינה מלאכותית, למידת מכונה ורשתות נוירונים.</p>
+                            <div class="content-icon">🤖</div>
+                            <h3>יסודות ה-AI וכלי הליבה</h3>
+                            <p>הכרות מעמיקה עם עקרונות הבינה המלאכותית וכלים מובילים כמו ChatGPT, Claude ו-Gemini. תלמדו איך לתקשר איתם ביעילות ולהפיק את המיטב.</p>
                         </div>
                         <div class="content-item">
-                            <div class="content-icon">🛠️</div>
-                            <h3>כלים מעשיים</h3>
-                            <p>ניסיון מעשי עם ChatGPT, Claude, Gemini ופלטפורמות בינה מלאכותית מתקדמות נוספות.</p>
+                            <div class="content-icon">✍️</div>
+                            <h3>יצירת תוכן ומצגות חכמות</h3>
+                            <p>גלו איך לרתום את ה-AI לכתיבת תוכן שיווקי, מאמרים, מיילים, יצירת מצגות מרתקות ועוד, תוך חיסכון אדיר בזמן ושיפור איכות.</p>
                         </div>
                         <div class="content-item">
-                            <div class="content-icon">📊</div>
-                            <h3>יישומים אמיתיים</h3>
-                            <p>למד ליישם בינה מלאכותית בניהול מסמכים, יצירת תוכן ושיפור פרודוקטיביות.</p>
+                            <div class="content-icon">⏰</div>
+                            <h3>להרוויח זמן בעבודה</h3>
+                            <p>למדו איך לרתום את הבינה המלאכותית בעבודה עם מיילים, מסמכים, קבצי Word, Excel ו-PDF.</p>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-icon">💡</div>
+                            <h3>יישומים מתקדמים: תכנות, דאטה ועיצוב</h3>
+                            <p>הרחבו את היכולות שלכם ליישומים מורכבים יותר: סיוע בכתיבת קוד, ניתוח נתונים, עיצוב גרפי בעזרת AI ועוד.</p>
                         </div>
                         <div class="content-item">
                             <div class="content-icon">🚀</div>
-                            <h3>צמיחה מקצועית</h3>
-                            <p>מקם את עצמך בשוק העבודה העתידי עם כישורי בינה מלאכותית מבוקשים והסמכות.</p>
+                            <h3>פרויקט גמר אישי</h3>
+                            <p>יישמו את כל הידע שרכשתם בפרויקט אישי שייקח את הרעיונות שלכם ויממש אותם באמצעות כלי ה-AI המתקדמים.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="curriculum">
-                    <h3>עיקרי תכנית הלימודים</h3>
-                    <div class="curriculum-grid">
-                        <div class="curriculum-module">
-                            <div class="module-number">01</div>
-                            <h4>יסודות ה-AI וכלי הליבה</h4>
-                            <ul>
-                                <li>מבוא לבינה מלאכותית ולמידת מכונה</li>
-                                <li>היכרות עם כלי ה-AI המובילים</li>
-                                <li>אתיקה של בינה מלאכותית ושימוש אחראי</li>
-                            </ul>
+            </div>
+        </section>
+
+        <!-- Target Audience Section -->
+        <section class="target-audience">
+            <div class="container">
+                <div class="target-audience-content">
+                    <h2>למי הקורס מתאים?</h2>
+                    <p>הקורס "בינה מלאכותית - מאפס למאה" מיועד לכל מי שרוצה לקחת צעד קדימה ולהשתלט על עולם ה-AI:</p>
+                    
+                    <div class="audience-grid">
+                        <div class="audience-item">
+                            <p>מנהלים המעוניינים להכשיר את עובדיהם ולהטמיע AI בארגון.</p>
                         </div>
-                        <div class="curriculum-module">
-                            <div class="module-number">02</div>
-                            <h4>יצירת תוכן ומצגות חכמות</h4>
-                            <ul>
-                                <li>כתיבה יצירתית ושיווקית</li>
-                                <li>יצירת מצגות מקצועיות</li>
-                                <li>עיצוב גרפי וחזותי</li>
-                            </ul>
+                        <div class="audience-item">
+                            <p>בעלי עסקים המבקשים להגדיל רווחיות, לייעל תהליכים ולצמצם עלויות באמצעות AI.</p>
                         </div>
-                        <div class="curriculum-module">
-                            <div class="module-number">03</div>
-                            <h4>להרוויח זמן בעבודה</h4>
-                            <ul>
-                                <li>אוטומציה של משימות יומיומיות</li>
-                                <li>יעילות בניהול מיילים ופגישות</li>
-                                <li>אופטימיזציה של תהליכי עבודה</li>
-                            </ul>
+                        <div class="audience-item">
+                            <p>אנשים פרטיים השואפים לשלוט בכלי AI לעבודה, ללימודים, ליצירתיות ולחיים האישיים.</p>
                         </div>
-                        <div class="curriculum-module">
-                            <div class="module-number">04</div>
-                            <h4>יישומים מתקדמים: תכנות, דאטה ועיצוב</h4>
-                            <ul>
-                                <li>תכנות בעזרת AI ללא רקע טכני</li>
-                                <li>ניתוח נתונים וויזואליזציה</li>
-                                <li>עיצוב מתקדם ויצירתיות</li>
-                            </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <div class="benefits-content">
+                    <h2>הטבות מיוחדות למשתתפי הקורס</h2>
+                    <p>כדי להבטיח את ההצלחה המקסימלית שלכם, כל משתתף בקורס יקבל:</p>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <p>חומרי עזר נוספים: קבצי PDF ומדריכים מעמיקים לשימוש יומיומי.</p>
                         </div>
-                        <div class="curriculum-module">
-                            <div class="module-number">05</div>
-                            <h4>פרויקט גמר אישי</h4>
-                            <ul>
-                                <li>בחירת פרויקט אישי מותאם</li>
-                                <li>ליווי אישי ביישום</li>
-                                <li>הצגה וקבלת משובים</li>
-                            </ul>
+                        <div class="benefit-card">
+                            <p>הקלטות מלאות של כל המפגשים לצפייה חוזרת ללא הגבלה.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <p>מפגש בונוס ייעודי לשאלות ותשובות עם המרצה, לאחר סיום הקורס.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>קצת על המרצה - יובל</h2>
+                </div>
+                
+                <div class="about-content">
+                    <div class="instructor-info">
+                        <div class="instructor-image">
+                            <div class="instructor-photo-container">
+                                <img src="src/assets/yuval-instructor.png" alt="יובל המרצה" class="instructor-photo">
+                            </div>
+                        </div>
+                        <div class="instructor-text">
+                            <p>אני יובל, מרצה, יועץ ומלווה ארגונים וחברות מובילות בתחום הבינה המלאכותית. במהלך השנים יצרתי והעברתי קורסים והדרכות מותאמות אישית לארגונים גדולים, למשרדי ממשלה ולחברות בינלאומיות.</p>
+                            
+                            <p>הניסיון שלי כולל מאות שעות הוראה מעשית והתנסות מעמיקה עם הכלים המובילים והחדשניים ביותר בשוק. הקורס הזה נבנה מתוך הבנה עמוקה של הצרכים העכשוויים והעתידיים, במטרה להעניק לכם את היתרון המשמעותי ביותר בעולם המשתנה.</p>
+                            
+                            <p>הצטרפו אלי למסע מרתק שבו תלמדו איך לרתום את כוחה של הבינה המלאכותית לטובתכם.</p>
                         </div>
                     </div>
                 </div>
@@ -209,13 +264,13 @@
                 <div class="testimonials-grid">
                     <div class="testimonial-item">
                         <div class="testimonial-content">
-                            <p>"הקורס המוצלח ביותר שעברתי בתחום ה-AI ב-3 שנים האחרונות. הפתרונות שהציגו המרצים ואופן הבנייה של הידע באמצעות מערך שיעור חכם נותן לכולם יכולת להתחבר ליכולות הגבוהות ביותר של ה-AI היום"</p>
+                            <p>"הקורס המוצלח ביותר שעברתי בתחום ה-AI ב-3 שנים האחרונות. הפתרונות שהציגו המרצים ואופן הבנייה של הידע באמצעות מערך שיעור חכם נותן לכולם יכולת להתחבר ליכולות הגבוהות ביותר של ה-AI היום בלי לשרוף זמן על ניסוי וטעייה ותסכול מסרטוני יוטיוב."</p>
                         </div>
                         <div class="testimonial-author">
-                            <div class="author-avatar">צג</div>
+                            <img src="src/assets/zion-galband.png" alt="ציון גלבנד" class="author-avatar-img">
                             <div class="author-info">
                                 <h4>ציון גלבנד</h4>
-                                <p>משתתף קורס</p>
+                                <p>בוגר קורס כלי בינה פרקטיים</p>
                             </div>
                         </div>
                         <div class="testimonial-rating">
@@ -225,13 +280,13 @@
                     
                     <div class="testimonial-item">
                         <div class="testimonial-content">
-                            <p>"רוצה להגיד שהיה לי קורס מרתק וכיפי, נחשפתי לכל מיני טיפים ודברים וכלים שבהחלט יסייעו לי בהמשך הדרך!"</p>
+                            <p>"רוצה להגיד שהיה לי קורס מרתק וכיפי, נחשפתי לכל מיני טיפים ודברים וכלים שבהחלט יסייעו לי בהמשך הדרך! תודה רבה על ההנחיה הכיפית, קולגה מהעבודה כבר נרשמה למחזור שמתחיל ב9.9 ואני די מקנאה:) בא לי שוב :)"</p>
                         </div>
                         <div class="testimonial-author">
-                            <div class="author-avatar">אב</div>
+                            <img src="src/assets/emily-ben-chamo.png" alt="אמילי בן חמו" class="author-avatar-img">
                             <div class="author-info">
                                 <h4>אמילי בן חמו</h4>
-                                <p>משתתפת קורס</p>
+                                <p>בוגרת קורס כלי בינה מלאכותית</p>
                             </div>
                         </div>
                         <div class="testimonial-rating">
@@ -241,38 +296,17 @@
                     
                     <div class="testimonial-item">
                         <div class="testimonial-content">
-                            <p>"שוב תודה תודה תודה!!!!על אופן העברת הקורס!על ההסברים המעולים והמפורטים!על תרגולים פרקטיים!על מענה סבלני!"</p>
+                            <p>"מעבר לזה שתוכן הקורס הוא מעיף את המוח, ומשנה חיים ממש, ההדרכה היתה מהטובות ביותר שחוויתי. באמת שלא זכור לי קורס כל כך ברור, זורם, מעניין וכיפי. אז תודה רבה רבה כבר על הכל, מחכה כבר לקורס המתקדם 🤗"</p>
                         </div>
                         <div class="testimonial-author">
-                            <div class="author-avatar">יא</div>
+                            <img src="src/assets/ezriel-pinski.png" alt="עזריאל פינסקי" class="author-avatar-img">
                             <div class="author-info">
-                                <h4>יעל אמסלם</h4>
-                                <p>משתתפת קורס</p>
+                                <h4>עזריאל פינסקי</h4>
+                                <p>בוגר קורס כלי בינה פרקטיים</p>
                             </div>
                         </div>
                         <div class="testimonial-rating">
                             <span>⭐⭐⭐⭐⭐</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2>קצת על המרצה - יובל</h2>
-                </div>
-                
-                <div class="about-content">
-                    <div class="instructor-info">
-                        <div class="instructor-text">
-                            <p>אני יובל, מרצה, יועץ ומלווה ארגונים וחברות מובילות בתחום הבינה המלאכותית. במהלך השנים יצרתי והעברתי קורסים והדרכות מותאמות אישית לארגונים גדולים, למשרדי ממשלה ולחברות בינלאומיות.</p>
-                            
-                            <p>הניסיון שלי כולל מאות שעות הוראה מעשית והתנסות מעמיקה עם הכלים המובילים והחדשניים ביותר בשוק. הקורס הזה נבנה מתוך הבנה עמוקה של הצרכים העכשוויים והעתידיים, במטרה להעניק לכם את היתרון המשמעותי ביותר בעולם המשתנה.</p>
-                            
-                            <p>הצטרפו אלי למסע מרתק שבו תלמדו איך לרתום את כוחה של הבינה המלאכותית לטובתכם.</p>
                         </div>
                     </div>
                 </div>
@@ -285,7 +319,7 @@
                 <div class="registration-content">
                     <div class="registration-info">
                         <h2>מוכן לשנות את הקריירה שלך?</h2>
-                        <p>הצטרף לקבוצה הבאה שלנו שמתחילה ב-10 בספטמבר, 2025</p>
+                        <p>הצטרף לקבוצה הבאה שלנו שמתחילה ב-15 באוקטובר, 2025</p>
                         <div class="target-audience">
                             <h3>הקורס מיועד עבור:</h3>
                             <ul>
@@ -306,7 +340,7 @@
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">לוח זמנים:</span>
-                                <span class="detail-value">רביעיים 17:00-21:30</span>
+                                <span class="detail-value">ימי רביעי 17:00-21:30</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">גודל קבוצה:</span>
@@ -329,18 +363,18 @@
                     
                     <div class="registration-form">
                         <h3>הבטח את המקום שלך</h3>
-                        <form class="form">
+                        <form class="form" id="registrationForm">
                             <div class="form-group">
-                                <input type="text" placeholder="שם מלא" required>
+                                <input type="text" name="name" placeholder="שם מלא" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="כתובת דוא״ל" required>
+                                <input type="email" name="email" placeholder="כתובת דוא״ל" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" placeholder="מספר טלפון" required>
+                                <input type="tel" name="phone" placeholder="מספר טלפון" required>
                             </div>
                             <div class="form-group">
-                                <select required>
+                                <select name="position">
                                     <option value="">התפקיד הנוכחי</option>
                                     <option value="developer">מפתח תוכנה</option>
                                     <option value="analyst">אנליסט עסקי</option>
@@ -351,7 +385,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea placeholder="מה אתה מקווה להשיג בבינה מלאכותית? (אופציונלי)" rows="3"></textarea>
+                                <textarea name="expectations" placeholder="מה אתה מקווה להשיג בבינה מלאכותית? (אופציונלי)" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn-primary btn-full">
                                 הירשם עכשיו
@@ -380,7 +414,7 @@
                             <span class="faq-toggle">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>הקורס מתחיל ב-10 לספטמבר. הוא מתקיים בזום בימי רביעי בערב מ 17:00-21:30.</p>
+                            <p>מחזור הבא מתחיל ב- 15 לאוקטובר. הוא מתקיים בזום בימי רביעי בערב מ 17:00-21:30.</p>
                         </div>
                     </div>
                     
@@ -417,14 +451,186 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Curriculum Section -->
+        <section class="curriculum-section">
+            <div class="container">
+                <div class="curriculum">
+                    <h2>תוכנית הלימודים המלאה</h2>
+                    <div class="curriculum-grid">
+                        <div class="curriculum-module">
+                            <div class="module-number">01</div>
+                            <h4>מבוא לבינה מלאכותית</h4>
+                            <ul>
+                                <li>מהי בינה מלאכותית ואיך היא משנה את העולם</li>
+                                <li>סוגי בינה מלאכותית: ANI, AGI ו-ASI</li>
+                                <li>יתרונות מהפכניים: רפואה, תוכנה, חינוך, צבא ופיננסיים</li>
+                                <li>הסיכונים והאתגרים: טיות, זייפות, עתיד התעסוקה ועוד</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">02</div>
+                            <h4>בינה מלאכותית גנרטיבית</h4>
+                            <ul>
+                                <li>מהי בינה מלאכותית יצרנית ואיך היא עובדת</li>
+                                <li>הכלים הבולטים שמשנים את השוק</li>
+                                <li>הפרומפט המנצח - נוסחה מוכחת לקבלת תוצאות משולמות</li>
+                                <li>תרגיל מעשי ליצירת פרומפטים אפקטיביים</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">03</div>
+                            <h4>היכרות עם מודלי השפה המובילים</h4>
+                            <ul>
+                                <li>ChatGPT, Claude, Copilot, Gemini, Perplexity ועוד...</li>
+                                <li>מתי להשתמש בכל מודל ולמה</li>
+                                <li>השוואה מעמיקה וטיפים לבחירה נכונה</li>
+                                <li>תרגיל מעשי בכל אחד המודלים</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">04</div>
+                            <h4>ChatGPT למתקדמים</h4>
+                            <ul>
+                                <li>פרטיות ובטחות - איך לעבוד בבטחה</li>
+                                <li>למוד המודל על עצמכם לתוצאות מותאמות אישית</li>
+                                <li>שימוש וניהול GPTs (סוכנים ייעודיים)</li>
+                                <li>AI כחשיבה ומחקר (Thinking Partner, Deep Research)</li>
+                                <li>תרגילים מתקדמים לפתיחת הפוטנציאל המלא</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">05</div>
+                            <h4>מהפכה בעבודה עם מיילים</h4>
+                            <ul>
+                                <li>כתיבת מיילים מקצועיים ואפקטיביים</li>
+                                <li>ניתוח מיילים מורכבים וחילוץ מידע חשוב</li>
+                                <li>טיפול במיילים רגישים ומאתגרים</li>
+                                <li>תרגיל מעשי על מיילים אמיתיים</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">06</div>
+                            <h4>בינה מלאכותית במובייל</h4>
+                            <ul>
+                                <li>יתרונות ואתגרי AI במובייל</li>
+                                <li>הגדרות מותאמות למכשירים ניידים</li>
+                                <li>שימושים ייחודיים שאפשריים רק במובייל</li>
+                                <li>עוזרים קוליים ותקשורת חכמה</li>
+                                <li>תרגיל מעשי עם כל המודלים במובייל</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">07</div>
+                            <h4>סיכומי דיונים ותמלול פגישות</h4>
+                            <ul>
+                                <li>מהקלטה למסמך מסודר ויעיל</li>
+                                <li>כלים מתקדמים לתמלול וסיכום פגישות</li>
+                                <li>הוצאת Action Items אוטומטית מסיכומים</li>
+                                <li>עבודה עם Zoom, Teams, GoogleMeet, TimeOS</li>
+                                <li>התמחות בעברית Kolword ו-Ivrit.ai</li>
+                                <li>תרגיל מעשי על תמלולי פגישות אמיתיות</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">08</div>
+                            <h4>עבודה עם קבצי Excel</h4>
+                            <ul>
+                                <li>ניתוח מתקדם של נתונים באמצעות AI</li>
+                                <li>מיזוג ופיצול קבצים באופן חכם</li>
+                                <li>עריכה ועיבוד נתונים אוטומטי</li>
+                                <li>יצירת רשימות וגרפים מרהיבים</li>
+                                <li>המחשות ויזואליות של נתונים מורכבים</li>
+                                <li>תרגיל מעשי על קבצים אמיתיים</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">09</div>
+                            <h4>ניתוח מסמכי Word</h4>
+                            <ul>
+                                <li>סיכום מסמכים והוצאת הנקודות החשובות</li>
+                                <li>יצירת דיאגרמות וגרפים ממידע טקסטואלי</li>
+                                <li>הזמנת סוכנים חכמים לסיוע מותאם</li>
+                                <li>תרגיל מעשי על מסמכים עסקיים</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">10</div>
+                            <h4>סוכנים חכמים GPTs - בוטים</h4>
+                            <ul>
+                                <li>הבנת סוגי הסוכנים השונים והשימושים שלהם</li>
+                                <li>שימוש מקצועי ב-GPTs קיימים</li>
+                                <li>טכניקות להזמנת סוכנים מותאמים</li>
+                                <li>ההבדל בין סוכן ל-Agent ומתי להשתמש בכל אחד</li>
+                                <li>יצירת סוכן חכם אישי ב-ChatGPT</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">11</div>
+                            <h4>יצירת מצגות מרהיבות</h4>
+                            <ul>
+                                <li>יצירת מצגות מקצועיות ב-Gamma במהירות שיא</li>
+                                <li>טכניקות לעיצוב ויזואלי משוך</li>
+                                <li>יצירת אלמנטים ייחודיים באמצעות Napkin</li>
+                                <li>תרגיל מעשי - יצירת מצגת עבור הפרויקט שלכם</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">12</div>
+                            <h4>עבודה עם RAG</h4>
+                            <ul>
+                                <li>שימוש מתקדם ב-NotebookLM</li>
+                                <li>יצירה וניהול של Projects ו-Spaces</li>
+                                <li>שילוב מסמכים ויצירת תובנות חדשות</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">13</div>
+                            <h4>יצירת תמונות</h4>
+                            <ul>
+                                <li>איך AI יוצרת תמונות והטכנולוגיה מאחורי הקלעים</li>
+                                <li>יצירת תמונות עם מודלי השפה המובילים</li>
+                                <li>עבודה עם CoPilot ו-Designer Microsoft</li>
+                                <li>הפרומפט המנצח ליצירת תמונות מדויקות</li>
+                                <li>יצירה ועריכה בסגנונות שונים</li>
+                                <li>כלים מתקדמים: Nano Banana, Reve, Leonardo ו-Artflow</li>
+                                <li>אימון מודלים אישיים</li>
+                                <li>תרגיל מעשי - יצירת תמונות לפרויקט שלכם</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">14</div>
+                            <h4>יצירת הנפשות וסרטונים</h4>
+                            <ul>
+                                <li>טכנולוגיות יצירת הנפשה מתקדמות</li>
+                                <li>עבודה עם Minimax, Kling ו-Veo3</li>
+                                <li>שילוב תמונות, טקסט ומוזיקה לסרטון משולם</li>
+                                <li>תרגיל מעשי - יצירת סרטון אנימציה אישי</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-module">
+                            <div class="module-number">15</div>
+                            <h4>יצירת מוזיקה</h4>
+                            <ul>
+                                <li>כתיבת שירים באמצעות בינה מלאכותית - גם בעברית!</li>
+                                <li>יצירת מוזיקה מקצועית עם Suno</li>
+                                <li>הלחנה בסגנונות מוזיקליים שונים</li>
+                                <li>תרגיל מעשי - כתיבה והלחנה של שיר מקורי</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section - TEMPORARILY COMMENTED OUT -->
+        <!--
         <section id="contact" class="contact">
             <div class="container">
                 <div class="section-header">
                     <h2>צור קשר</h2>
                     <p>יש לך שאלות? אנחנו כאן כדי לעזור לך להצליח</p>
                 </div>
-                
+
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="contact-item">
@@ -449,7 +655,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="contact-form">
                         <form class="form">
                             <div class="form-row">
@@ -474,24 +680,54 @@
                 </div>
             </div>
         </section>
+        -->
+
+        <!-- Investment CTA Section -->
+        <section class="investment-cta">
+            <div class="container">
+                <div class="investment-content">
+                    <h2>השקיעו בעתיד שלכם עוד היום</h2>
+                    <p>במקום להשקיע חודשים של למידה עצמית, ניסוי וטעייה, הקורס הממוקד והמעשי הזה ייתן לכם את כל הכלים והידע הנדרשים בזמן קצר, ובצורה מובנית ומקצועית.</p>
+                    <p class="investment-highlight">השקעה קטנה היום שתעניק לכם יתרון עצום ומכריע לשנים קדימה בעולם העבודה והעסקים!</p>
+                    <button class="btn-reserve" onclick="window.location.href='https://payments.payplus.co.il/b59d2594-a16c-445a-a633-223048ea9286'">שריינו מקום עכשיו</button>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/972506699010" target="_blank" class="whatsapp-float">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.707"/>
+        </svg>
+    </a>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>ZebrApps AI</h3>
+                    <img src="/src/assets/zebrapps-logo.jpg" alt="ZebrApps AI" class="footer-logo">
                     <p>מעצימים מקצוענים עם כישורי בינה מלאכותית לעתיד</p>
                 </div>
                 <div class="footer-links">
-                    <a href="https://zebrapps.ai">האתר הראשי</a>
-                    <a href="#course">פרטי הקורס</a>
-                    <a href="#contact">צור קשר</a>
+                    <div class="footer-links-column">
+                        <a href="#testimonials">המלצות</a>
+                        <a href="#registration">הרשמה</a>
+                        <a href="#faq">שאלות נפוצות</a>
+                        <a href="https://cdn.shopify.com/s/files/1/0687/1829/7265/files/AI-from-0-to-100.pdf?v=1756571508" target="_blank">סיליבוס הקורס</a>
+                    </div>
+                    <div class="footer-links-column">
+                        <a href="https://zebrapps.ai">האתר הראשי</a>
+                        <a href="#home">בית</a>
+                        <a href="#course">הקורס</a>
+                        <a href="#about">אודות</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 ZebrApps AI. כל הזכויות שמורות.</p>
+                <p>ליצירת קשר: <a href="mailto:yuval@zebrapps.com">yuval@zebrapps.com</a> | טלפון: <a href="tel:+972506699010">050-6699010</a></p>
+                <p>כל הזכויות שמורות. &copy; 2025 Zebrapps AI</p>
             </div>
         </div>
     </footer>
