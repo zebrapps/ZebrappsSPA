@@ -75,6 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
         this.classList.toggle('active');
     });
 
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (navMenu.classList.contains('active') &&
+            !navMenu.contains(e.target) &&
+            !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    });
+
     // Scroll animations
     const observerOptions = {
         threshold: 0.1,
