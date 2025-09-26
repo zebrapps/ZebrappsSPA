@@ -1,3 +1,6 @@
+// Import CSS
+import './style.css';
+
 // Initialize EmailJS
 (function() {
     emailjs.init("YOUR_PUBLIC_KEY"); // You need to replace this with your actual EmailJS public key

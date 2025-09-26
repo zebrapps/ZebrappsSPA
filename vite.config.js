@@ -7,23 +7,11 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
     rollupOptions: {
-      external: ['fsevents'],
-      output: {
-        manualChunks: {
-          vendor: ['vite']
-        }
-      }
+      external: ['fsevents']
     }
-  },
-  css: {
-    devSourcemap: true
   },
   optimizeDeps: {
     exclude: ['fsevents']
-  },
-  define: {
-    global: 'globalThis'
   }
 })
