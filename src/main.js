@@ -279,11 +279,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     otherItem.classList.remove('active');
                 }
             });
-            
+
             // Toggle current item
             item.classList.toggle('active');
         });
     });
+
+    // Reserve button functionality
+    const reserveButton = document.getElementById('reserveButton');
+    if (reserveButton) {
+        reserveButton.addEventListener('click', () => {
+            window.location.href = import.meta.env.VITE_PAYMENT_URL;
+        });
+    }
 });
 
 // Debug flag - set to false to reduce console output
@@ -400,7 +408,7 @@ async function sendRegistrationEmail(data) {
 
             // Redirect to payment after a short delay
             setTimeout(() => {
-                window.location.href = 'https://payments.payplus.co.il/617b895d-b30d-43c7-b525-dd5f6ff6d18b';
+                window.location.href = import.meta.env.VITE_PAYMENT_URL;
             }, 2000);
         } else {
             debugLog('API returned error:', result.error);
