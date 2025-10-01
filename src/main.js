@@ -67,6 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.scrollIntoView({behavior: 'smooth', block: 'start'});
             }
 
+            // Track virtual pageview in Google Analytics
+            if (typeof gtag !== 'undefined' && targetId) {
+                gtag('event', 'page_view', {
+                    page_title: this.textContent.trim(),
+                    page_location: window.location.origin + '/#' + targetId,
+                    page_path: '/' + targetId
+                });
+            }
+
             // Close mobile menu after clicking a link
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
