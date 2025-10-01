@@ -288,8 +288,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reserve button functionality
     const reserveButton = document.getElementById('reserveButton');
     if (reserveButton) {
-        reserveButton.addEventListener('click', () => {
-            window.location.href = import.meta.env.VITE_PAYMENT_URL;
+        reserveButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/payment-url');
+                const data = await response.json();
+                const paymentUrl = data.paymentUrl || 'https://payments.payplus.co.il/c28ff96f-3d3c-4c70-89e9-3be25a20be23';
+                window.location.href = paymentUrl;
+            } catch (error) {
+                console.error('Failed to fetch payment URL:', error);
+                // Fallback URL in case of error
+                window.location.href = 'https://payments.payplus.co.il/c28ff96f-3d3c-4c70-89e9-3be25a20be23';
+            }
         });
     }
 });
@@ -407,8 +416,18 @@ async function sendRegistrationEmail(data) {
             document.getElementById('registrationForm').reset();
 
             // Redirect to payment after a short delay
-            setTimeout(() => {
-                window.location.href = import.meta.env.VITE_PAYMENT_URL;
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('/api/payment-url');
+                    const data = await response.json();
+                    const paymentUrl = data.paymentUrl || 'https://payments.payplus.co.il/c28ff96f-3d3c-4c70-89e9-3be25a20be23';
+                    debugLog('Redirecting to payment URL:', paymentUrl);
+                    window.location.href = paymentUrl;
+                } catch (error) {
+                    console.error('Failed to fetch payment URL:', error);
+                    // Fallback URL in case of error
+                    window.location.href = 'https://payments.payplus.co.il/c28ff96f-3d3c-4c70-89e9-3be25a20be23';
+                }
             }, 2000);
         } else {
             debugLog('API returned error:', result.error);
