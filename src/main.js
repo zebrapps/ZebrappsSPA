@@ -289,6 +289,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const reserveButton = document.getElementById('reserveButton');
     if (reserveButton) {
         reserveButton.addEventListener('click', async () => {
+            // Track reserve button click in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'reserve_button_click', {
+                    event_category: 'engagement',
+                    event_label: 'Reserve Now Button',
+                    value: 1
+                });
+            }
+
             try {
                 const response = await fetch('/api/payment-url');
                 const data = await response.json();
@@ -409,6 +418,16 @@ async function sendRegistrationEmail(data) {
 
         if (result.ok) {
             debugLog('Success! Showing success message');
+
+            // Track registration event in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'registration_submitted', {
+                    event_category: 'engagement',
+                    event_label: 'Course Registration Form',
+                    value: 1
+                });
+            }
+
             // Success - show thank you message and redirect to payment
             showSuccessMessage('registration');
 
@@ -422,6 +441,16 @@ async function sendRegistrationEmail(data) {
                     const data = await response.json();
                     const paymentUrl = data.paymentUrl || 'https://payments.payplus.co.il/c28ff96f-3d3c-4c70-89e9-3be25a20be23';
                     debugLog('Redirecting to payment URL:', paymentUrl);
+
+                    // Track payment redirect event
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'begin_checkout', {
+                            event_category: 'ecommerce',
+                            event_label: 'Redirect to Payment',
+                            value: 2850
+                        });
+                    }
+
                     window.location.href = paymentUrl;
                 } catch (error) {
                     console.error('Failed to fetch payment URL:', error);
@@ -448,9 +477,7 @@ async function sendRegistrationEmail(data) {
 window.addEventListener('error', function(e) {
     // Suppress common external service errors
     if (e.message && (
-        e.message.includes('google-analytics') ||
-        e.message.includes('ERR_BLOCKED_BY_CLIENT') ||
-        e.message.includes('Failed to fetch') && e.filename && e.filename.includes('google')
+        e.message.includes('ERR_BLOCKED_BY_CLIENT')
     )) {
         e.preventDefault();
         return false;
@@ -460,8 +487,6 @@ window.addEventListener('error', function(e) {
 // Handle unhandled promise rejections (like network failures)
 window.addEventListener('unhandledrejection', function(e) {
     if (e.reason && (
-        e.reason.message?.includes('google-analytics') ||
-        e.reason.message?.includes('Failed to fetch') ||
         e.reason.message?.includes('ERR_BLOCKED_BY_CLIENT')
     )) {
         e.preventDefault();
