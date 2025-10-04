@@ -1,0 +1,37 @@
+# robots.txt for aicourse.info - allow all crawlers, including AI and search engines
+User-agent: *
+Allow: /
+
+# Explicit allows for common bots - redundant with "*" but included for clarity
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Baiduspider
+Allow: /
+User-agent: Yandex
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+User-agent: Slurp
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+
+Sitemap: https://aicourse.info/sitemap.xml
