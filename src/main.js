@@ -456,7 +456,7 @@ async function sendRegistrationEmail(data) {
                         gtag('event', 'begin_checkout', {
                             event_category: 'ecommerce',
                             event_label: 'Redirect to Payment',
-                            value: 3000
+                            value: 2350
                         });
                     }
 
